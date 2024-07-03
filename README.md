@@ -2,13 +2,15 @@
 
 We are attempting to predict certain characteristics of a neighborhood based on the cars included inside it. The research question we will attempt to answer is can we predict median income based on the cars in the neighborhood?
 
+https://data.ny.gov/Transportation/Vehicle-Snowmobile-and-Boat-Registrations/w4pv-hbkt/data
+
 *Initial Sampling*
 
 Our DMV registration data which we are utilizing is large, with around 12.2 million observations. 
 
 We utilized stratified sampling, focusing on keeping the zipcode percentages consistent. We initially did 5% of our data, which is around 500 cars per zip code, but after receiving poor results, we increased up to 20% (2,000 cars) and then 40% (4,000 cars). 
 
-**The sampled data included in the github repo is 5%**
+**The sampled data included in the github repo is 1%**
 
 *Initial Regression*
 
