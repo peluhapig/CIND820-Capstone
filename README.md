@@ -1,33 +1,25 @@
-**Read Me File For Initial Results**
+**Read Me File For Final Results**
 
-We are attempting to predict certain characteristics of a neighborhood based on the cars included inside it. The research question we will attempt to answer is can we predict median income based on the cars in the neighborhood?
+All python files included are commented.
 
-https://data.ny.gov/Transportation/Vehicle-Snowmobile-and-Boat-Registrations/w4pv-hbkt/data
+The CSV Files included in the repo are:
+- zip_codes.csv : used for active NYS Zip Codes
+- mi.csv : census data by Zip code used for Median Income
+- sample_cars.csv : not used, generated for previous version but useful for viewer to get an idea of the data we used as the main dataset was too big to include
+- sample_zips.csv : Number of cars of each make registered by zip code
+- data_classes.csv : The same as above with an added column of classified income, 0 being lowest, 4 being highest
+- norm_data_classes.csv: The same as above but normalized
 
-*Initial Sampling*
-
-Our DMV registration data which we are utilizing is large, with around 12.2 million observations. 
-
-We utilized stratified sampling, focusing on keeping the zipcode percentages consistent. We initially did 5% of our data, which is around 500 cars per zip code, but after receiving poor results, we increased up to 20% (2,000 cars) and then 40% (4,000 cars). 
-
-**The sampled data included in the github repo is 1%**
-
-*Initial Regression*
-
-The sampled dataset was then cleaned, with the median income added.
-
-Afterward, we made the categorical variables into dummy attributes and attempted to do a regression where our results were abysmal. 
-
-*Pivoting Strategies and Generating New Data*
-
-After seeing the results, we decided to instead count the number of cars of each make in each zip code. We initially did this on a sample set, where we set the "threshold" value to 20 (meaning there had to be at least 20 vehicles of that make registered in NY), but then performed it on the entire set with a threshold of 100,000.
-
-Our MSE for our regression-based off these numbers of cars in zipcode values were initially around 1,000,000 and went down to around 700,000. 
-
-*Further Steps and Plans*
-
-Despite the high MSE, it has potential. Honestly, the ZIP code system is prone to redlining and historically the outliers are OUTLIERS, and it can be hard to do a regression on a dataset with as many as we have. My future steps will be to maybe instead of zip code, group by town and find the town median from the census data. This may be a bit of work and I may have to scrape it myself, however, it would greatly aid in reducing the MSE.
+The Python files included are:
+- number_of_makes_per_zip.py : this generates the sample_zips file, it counts the total number of cars of certain makes in each zip code.
+- data_census_combination.py : this generates the data_classes file and adds classes corresponding to median income to each Zip.
+- zip_prediciton.py: This contains all of the predictive models of our project. I attempted to comment it very thoroughly.
+- normalization.py: this normalizes our data_classes and outputs norm_data_classes. I got worse results when using it to predict but it may prove useful in the future or for visualization.
 
 
-The differences are also in the range of 10,000, which if we're predicting median income is acceptable. The main issue is with those previously mentioned outlier zip codes, where the median income is 200,000 and we predict 80,000. This may also have to do with the pretty high threshold value we chose, we may lower it to 70,000 registered vehicles as we are only considering a few makes, of which there aren't any "high-value brands".
 
+Data sources:
+
+- NYS Registration Data: https://data.ny.gov/Transportation/Vehicle-Snowmobile-and-Boat-Registrations/w4pv-hbkt/about_data
+
+- Census Data: https://data.census.gov/table?q=S1903:%20Median%20Income%20in%20the%20Past%2012%20Months%20(in%202022%20Inflation-Adjusted%20Dollars)&g=040XX00US36$8600000
